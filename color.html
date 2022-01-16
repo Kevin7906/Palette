@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        body {
+            background-color: rgb(24, 24, 24);
+            font-weight: bolder;
+            color: yellow;
+        }
+
+        .contenter {
+            background-color: rgb(0, 0, 0);
+            width: 900px;
+            height: 900px;
+            position: absolute;
+            top: 10%;
+            left: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: circle(50% at 50% 50%);
+        }
+        
+        .color {
+            width: 500px;
+            height: 500px;
+            background-color: burlywood;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-evenly;
+            clip-path: circle(50% at 50% 50%);
+        }
+        
+        .rangebox {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            height: 200px;
+            justify-content: space-around;
+            position: absolute;
+            left: 38%;
+            top: 37%;
+        }
+        
+        .valuebox {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            height: 200px;
+            justify-content: space-around;
+            position: absolute;
+            top: 37%;
+            left: 29%;
+            z-index: -1;
+        }
+        
+        .value-red {
+            background-color: rgb(0, 0, 0);
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 9em;
+        }
+        
+        .value-green {
+            background-color: rgb(0, 0, 0);
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 9em;
+            
+        }
+        
+        .value-blue {
+            background-color: rgb(0, 0, 0);
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: rgb(red, green, blue);
+            border-radius: 9em;
+        }
+        
+        .color-code {
+            width: 150px;
+            height: 50px;
+            background-color: tomato;
+            line-height: 50px;
+            font-size: 30px;
+            letter-spacing: 4px;
+            position: absolute;
+            top: 65%;
+            left: 0%;
+            padding-left: 10px;
+            animation: move 5s infinite ;
+        }
+        @keyframes move {
+            0% {
+                left: 0;
+            } 
+            25% {
+                left: 20%;
+            }
+            50% {
+                left: 40%;
+            }
+            75% {
+                left: 60%;
+            }
+            100% {
+                left: 80%;
+            }
+        }
+        </style>
+</head>
+
+<body>
+    <div class="contenter">
+        <div class="color">
+            <div class="rangebox">
+                <input type="range" name="" id="red" min="0" max="255" value="0">
+                <input type="range" name="" id="green" min="0" max="255" value="0">
+                <input type="range" name="" id="blue" min="0" max="255" value="0">
+            </div>
+            <div class="valuebox">
+                <div class="value-red">0</div>
+                <div class="value-green">0</div>
+                <div class="value-blue">0</div>
+            </div>
+            <div class="color-code">#000000</div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        let redElement = document.getElementById('red');
+        let greenElement = document.getElementById('green');
+        let blueElement = document.getElementById('blue');
+        const redValue = document.querySelector('.value-red');
+        const greenValue = document.querySelector('.value-green');
+        const blueValue = document.querySelector('.value-blue');
+        const colors = document.querySelector('.contenter');
+        const colorCode = document.querySelector('.color-code');
+
+        redElement.addEventListener('mousemove', function () {
+            redValue.innerHTML = redElement.value;
+            rgb()
+            red()
+            code()
+        });
+        greenElement.addEventListener('mousemove', function () {
+            greenValue.innerHTML = greenElement.value;
+            rgb()
+            green()
+            code()
+        });
+        blueElement.addEventListener('mousemove', function () {
+            blueValue.innerHTML = blueElement.value;
+            rgb()
+            blue()
+            code()
+        });
+
+        function rgb() {
+            colors.style.backgroundColor = `rgb(${redElement.value}, ${greenElement.value}, ${blueElement.value})`
+        };
+
+        function red() {
+            redValue.style.backgroundColor = `rgb(${redElement.value}, 0, 0)`
+        };
+
+        function green() {
+            greenValue.style.backgroundColor = `rgb(0, ${greenElement.value}, 0)`
+        };
+
+        function blue() {
+            blueValue.style.backgroundColor = `rgb(0, 0, ${blueElement.value})`
+        };
+
+
+        function hexCode(i) {
+            if (i < 16) {
+                i = "0" + i;
+            }
+            return i;
+        }
+        function code() {
+            let red = Number(redElement.value).toString(16);
+            let blue = Number(blueElement.value).toString(16);
+            let green = Number(greenElement.value).toString(16);
+            red = hexCode(red)
+            blue = hexCode(blue)
+            green = hexCode(green)
+            colorCode.innerHTML = `#${red}${blue}${green}`
+        }
+    </script>
+</body>
+
+</html>
